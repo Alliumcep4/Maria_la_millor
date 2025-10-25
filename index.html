@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Cum</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <!-- Partículas flotantes -->
+    <div class="particulas">
+        <div class="particula"></div>
+        <div class="particula"></div>
+        <div class="particula"></div>
+        <div class="particula"></div>
+        <div class="particula"></div>
+    </div>
+
+    <!-- Guirnalda izquierda -->
+    <div class="guirnalda-izquierda">
+        <img src="img/Guirnalda.png" alt="Guirnalda">
+    </div>
+    
+    <!-- Guirnalda derecha -->
+    <div class="guirnalda-derecha">
+        <img src="img/guirnalda_2.png" alt="Guirnalda">
+    </div>
+    
+    <!-- Contenedor principal -->
+    <div class="contenedor-principal">
+        <!-- Sección del letrero y pastel -->
+        <div class="seccion-letrero">
+            <h1 class="letrero-animado">
+                <span>F</span><span>E</span><span>L</span><span>I</span><span>Z</span>
+                <span> </span>
+                <span>C</span><span>U</span><span>M</span>
+            </h1>
+            
+            <div class="imagen-pastel">
+                <img src="img/keki.png" alt="Pastel de cumpleaños">
+            </div>
+            
+            <button class="boton-especial" onclick="abrirCarta()">Click aquí, Maria la millor</button>
+        </div>
+        
+        <!-- Sección de tu amiga con globos -->
+        <div class="seccion-amiga">
+            <div class="globo globo-1">
+                <img src="img/Globito.png" alt="Globo">
+            </div>
+            <div class="foto-amiga">
+                <img src="img/Mm.png" alt="Mi amiga">
+            </div>
+            <div class="globo globo-2">
+                <img src="img/Globito.png" alt="Globo">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Estrellas esparcidas -->
+    <div class="estrella estrella-1">
+        <img src="img/spark.png" alt="Estrella">
+    </div>
+    <div class="estrella estrella-2">
+        <img src="img/spark.png" alt="Estrella">
+    </div>
+    <div class="estrella estrella-3">
+        <img src="img/spark.png" alt="Estrella">
+    </div>
+    <div class="estrella estrella-4">
+        <img src="img/spark.png" alt="Estrella">
+    </div>
+    
+    <!-- Tres imágenes adicionales esparcidas -->
+    <div class="imagen-extra imagen-extra-1">
+        <img src="img/Gatico.png" alt="Decoración">
+    </div>
+    <div class="imagen-extra imagen-extra-2">
+        <img src="img/Sapo.png" alt="Decoración">
+    </div>
+    <div class="imagen-extra imagen-extra-3">
+        <img src="img/Bubble_tea.png" alt="Decoración">
+    </div>
+
+    <!-- Modal de la carta -->
+    <div class="modal-carta" id="modalCarta">
+        <div class="carta-overlay" onclick="cerrarCarta()"></div>
+        <div class="carta-contenedor">
+            <button class="cerrar-carta" onclick="cerrarCarta()">✕</button>
+            <div class="carta-contenido">
+                <h1>¡Feliz Cumpleaños, Maria! 🎉</h1>
+                
+                <!-- Contador de edad animado -->
+                <div class="contador-edad">
+                    <span class="numero-edad" id="edadContador">0</span>
+                    <span class="texto-edad">¡Años!</span>
+                </div>
+                
+                <p>Per a la meva foficul</p>
+                <p>
+                    Feliz cumpleaños Maria, me alegro mucho del día en que me dijiste que mis zapas estaban to' guapas 
+                    a pesar de que no me enteré. Sin ese momento probablemente ahora no nos hubiéramos hecho amigos y la verdad 
+                    qué mierda una vida en la que no hubiese pasado eso. 
+                </p>
+                <p>
+                    Espero que todo vaya mejor a partir de ahora y que viajemos mucho en un futuro (juntas) 
+                    y tal, que lo pases muy bien en tu día bb. 
+                </p>
+                <p>Que cumplas muchos años más y cada año mejor</p>
+                <p class="firma">Tu foficul </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de música -->
+    <button class="boton-musica" onclick="toggleMusica()">
+        <span id="iconoMusica">🔊</span>
+    </button>
+
+    <!-- Música de fondo -->
+    <audio id="musicaFondo" loop>
+        <source src="audio/demons.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let musicaActiva = false;
+
+        function toggleMusica() {
+            const musica = document.getElementById('musicaFondo');
+            const icono = document.getElementById('iconoMusica');
+            
+            if (musicaActiva) {
+                musica.pause();
+                icono.textContent = '🔇';
+                musicaActiva = false;
+            } else {
+                musica.play();
+                icono.textContent = '🔊';
+                musicaActiva = true;
+            }
+        }
+
+        function abrirCarta() {
+            // Lanzar confetti
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#9cc775', '#6b8e4e', '#a4133c', '#c9184a', '#ff6b6b']
+            });
+            
+            // Segundo confetti con delay
+            setTimeout(() => {
+                confetti({
+                    particleCount: 100,
+                    spread: 60,
+                    origin: { y: 0.7 },
+                    colors: ['#b8e986', '#7fb069', '#800f2f']
+                });
+            }, 250);
+            
+            // Abrir modal
+            const modal = document.getElementById('modalCarta');
+            modal.classList.add('activo');
+            document.body.style.overflow = 'hidden';
+            
+            // Animar contador de edad (cambia 25 por la edad real de María)
+            animarContador(22);
+        }
+
+        function animarContador(edadFinal) {
+            let contador = 0;
+            const elemento = document.getElementById('edadContador');
+            const intervalo = setInterval(() => {
+                contador++;
+                elemento.textContent = contador;
+                if (contador >= edadFinal) {
+                    clearInterval(intervalo);
+                }
+            }, 50);
+        }
+
+        function cerrarCarta() {
+            const modal = document.getElementById('modalCarta');
+            modal.classList.remove('activo');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar con tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                cerrarCarta();
+            }
+        });
+    </script>
+</body>
+</html>
